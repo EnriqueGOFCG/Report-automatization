@@ -11,9 +11,13 @@ En el directorio principal existen dos carpetas principales: Python Scripts y R 
 ```
 pip install pyodbc
 ```
-* Descargar e Microsoft® ODBC Driver 13.1 for SQL Server®
-link:
-https://www.microsoft.com/en-us/download/details.aspx?id=53339
+* Descargar e instalar Microsoft® ODBC Driver 13.1 for SQL Server® desde:
+
+> https://www.microsoft.com/en-us/download/details.aspx?id=53339
+
+Posteriormente configurarlo, sugerido videotutorial:
+
+> https://www.youtube.com/watch?v=2xQX76nEdvo
 
 # Método de Uso
 
