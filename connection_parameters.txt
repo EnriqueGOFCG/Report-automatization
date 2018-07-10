@@ -1,0 +1,5 @@
+Driver= ODBC Driver 13 for SQL Server
+Server= fcgpro-mx.database.windows.net
+Database= fcg_pro_country_mart_mx
+UID= readonlylogin
+PWD= 1231!#ASDF!a
