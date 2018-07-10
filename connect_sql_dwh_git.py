@@ -7,13 +7,11 @@ Created on Mon Jul  9 17:03:29 2018
 
 import pyodbc
 import sys
-from IPython.display import display
 import pandas as pd
 import os
 
 
-dwh_directory = r'./Documents/Python CSVs/DWH Tables'
-exp_directory = r'.\Documents\Python CSVs\Export Tables'
+dwh_directory = r'./Python CSVs/DWH Tables'
 
 if not os.path.exists(dwh_directory):
     os.makedirs(dwh_directory)
@@ -59,7 +57,6 @@ def get_dwh_tables(connection_parameters_dir):
 
 if __name__ == "__main__":
     connection_parameters_dir = sys.argv[1]
-#    connection_parameters_dir = r'C:\Users\Frontier\Documents\connection_parameters.txt'
     get_dwh_tables(connection_parameters_dir)
     
 
