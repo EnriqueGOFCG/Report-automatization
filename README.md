@@ -4,6 +4,17 @@ En este repositorio de brindan las herramientas para la automatización de la ge
 
 En el directorio principal existen dos carpetas principales: Python Scripts y R Scripts. Ambas se dividen a su vez en carpetas secundarias cuyo nombre es ilustrativo del reporte que se puede generar a partir de ellas, y contienen un manual de uso propio.
 
+# Requerimientos previos:
+
+* Contar con un ambiente de python (Anaconda sugerido)
+* Installar librería pyodbc mediante 
+```
+pip install pyodbc
+```
+* Descargar e Microsoft® ODBC Driver 13.1 for SQL Server®
+link:
+https://www.microsoft.com/en-us/download/details.aspx?id=53339
+
 # Método de Uso
 
 1. Copiar todos los archivos contenidos en el repositorio a la ubicación de la PC en la que se desea almacenar los reportes.
