@@ -6,8 +6,8 @@ En el directorio principal existen dos carpetas principales: Python Scripts y R 
 
 # Método de Uso
 
-1- Copiar todos los archivos contenidos en el repositorio a la ubicación de la PC en la que se desea almacenar los reportes.
-2- En un ambiente de Python, ejecutar el comando:
+1. Copiar todos los archivos contenidos en el repositorio a la ubicación de la PC en la que se desea almacenar los reportes.
+2. En un ambiente de Python, ejecutar el comando:
 
 ```
 python ".\MiCarpeta\connect_sql_dwh_git.py" .\Micarpeta\connection_parameters.txt
