@@ -18,7 +18,7 @@ if not os.path.exists(dwh_directory):
 
 
 def get_dwh_tables(connection_parameters_dir):
-    connection_parameters = open(connection_parameters_dir)
+    connection_parameters = open(connection_parameters_dir + '\connection_parameters.txt')
     connection_parameters = connection_parameters.readlines()
     
     cnxn = pyodbc.connect(Driver = connection_parameters[0].split('= ')[1][:-1],
@@ -40,7 +40,7 @@ def get_dwh_tables(connection_parameters_dir):
     auction_winners = pd.read_sql("SELECT * FROM dbo.AuctionWinners", cnxn)
     inspection_centers = pd.read_sql("SELECT * FROM dbo.InspectionCenter", cnxn)
     
-    cars.to_csv(r'./Documents/Python CSVs/DWH Tables/db_cars.csv', index = False)
+    cars.to_csv(dwh_directory + r'/db_cars.csv', index = False)
     car_manufacturers.to_csv(dwh_directory + '\db_cars_manufacturers.csv', index = False)
     car_models.to_csv(dwh_directory + '\db_cars_models.csv', index = False)
     bids.to_csv(dwh_directory + '\db_bids.csv', index = False)
