@@ -32,6 +32,7 @@ python ".\MiCarpeta\connect_sql_dwh_git.py" .\Micarpeta\connection_parameters.tx
 ```
 
 4. Ejecutar los programas para cada reporte, cuya documentación se encuentra en la carpeta del mismo nombre.
+
 Ejemplo:
 
 ```
