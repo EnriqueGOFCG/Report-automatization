@@ -15,14 +15,17 @@ pip install pyodbc
 
 > https://www.microsoft.com/en-us/download/details.aspx?id=53339
 
-Posteriormente configurarlo, sugerido videotutorial:
+* Configurar un origen de datos ODBC, como sugerencia utilizar el videotutorial:
 
 > https://www.youtube.com/watch?v=2xQX76nEdvo
+
+Y sustituyendo lo parámetros por los correctos.
 
 # Método de Uso
 
 1. Copiar todos los archivos contenidos en el repositorio a la ubicación de la PC en la que se desea almacenar los reportes.
-2. En un ambiente de Python, ejecutar el comando:
+2. Editar los parámetros en el archivo "connection_parameter.txt" para poder acceder al origen de datos SQL configurado anteriormente.
+3. En un ambiente de Python, ejecutar el comando:
 
 ```
 python ".\MiCarpeta\connect_sql_dwh_git.py" .\Micarpeta\connection_parameters.txt
