@@ -28,7 +28,7 @@ Y sustituyendo lo parámetros por los correctos.
 3. En un ambiente de Python, ejecutar el comando:
 
 ```
-python ".\MiCarpeta\connect_sql_dwh_git.py" .\Micarpeta\connection_parameters.txt
+python ".\connect_sql_dwh_git.py" .\Micarpeta\connection_parameters.txt
 ```
 
 4. Ejecutar los programas para cada reporte, cuya documentación se encuentra en la carpeta del mismo nombre.
@@ -36,5 +36,5 @@ python ".\MiCarpeta\connect_sql_dwh_git.py" .\Micarpeta\connection_parameters.tx
 Ejemplo:
 
 ```
-Ejecutrar python ".\MiCarpeta\MiPrograma.py"
+Ejecutar python ".\MiCarpeta\MiPrograma.py"
 ```
