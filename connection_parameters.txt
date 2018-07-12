@@ -1,5 +1,0 @@
-Driver= ODBC Driver 13 for SQL Server
-Server= xxxxxxxxxxxxxxxxxxxxxxxx
-Database= xxxxxxxxxxxxxxxxxxxxxxxx
-UID= xxxxxxxxxxxxxxxxxxxxxxxx
-PWD= xxxxxxxxxxxxxxxxxxxxxxxx
