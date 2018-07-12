@@ -28,13 +28,15 @@ Y sustituyendo lo parámetros por los correctos.
 3. En un ambiente de Python, ejecutar el comando:
 
 ```
-python ".\connect_sql_dwh_git.py" .\Micarpeta\connection_parameters.txt
+python ".\connect_sql_dwh_git.py" .\
 ```
+
+Donde el argumento ```.\``` es el directorio en el cual se encuentran las credenciales con formato confidencial.
 
 4. Ejecutar los programas para cada reporte, cuya documentación se encuentra en la carpeta del mismo nombre.
 
 Ejemplo:
 
 ```
-Ejecutar python ".\MiCarpeta\MiPrograma.py"
+python ".\MiCarpeta\MiPrograma.py"
 ```
