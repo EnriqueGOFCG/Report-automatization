@@ -1,5 +1,5 @@
 #
-*.txt
+connection_parameters.txt
 
 #
 /Python CSVs
