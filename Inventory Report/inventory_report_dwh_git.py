@@ -40,7 +40,6 @@ columns_1 = ['internal_car_id',
              'Precio sin IVA', 
              'car_purchase_location',
              'car_handedover_from_seller',
-             'car_handedover_to_buyer',
              'car_current_location',
              'client_subtype',
              'car_manufacturer_name',
@@ -91,19 +90,22 @@ inventory_cars_dwh.car_handedover_from_seller = inventory_cars_dwh.car_handedove
 strange_cars_dwh.car_handedover_from_seller = strange_cars_dwh.car_handedover_from_seller.apply(list0).replace('nan','')
 
 #inventory_cars_dwh = inventory_cars_dwh.iloc[:, 3:]
-inventory_cars_dwh = inventory_cars_dwh.rename(columns = {'internal_car_id':'ID', 
-                                                'car_vin':'NIV', 
-                                                'purchase_channel':'Tipo de compra',	
-                                                'car_purchase_price_car':'Precio con IVA',	
-                                                'car_purchase_location':'Origen de compra', 
-                                                'car_handedover_from_seller':'Fecha de ingreso	',
-                                                'car_current_location':'Ubicacion Actual',
-                                                'client_subtype': 'Persona compra',
-                                                'car_manufacturer_name': 'Marca',
-                                                'car_model_name': 'Modelo',
-                                                'year_manufactured': 'Año',
-                                                'car_trim': 'Versión',
-                                                'car_color': 'Color'})
+inventory_cars_dwh = inventory_cars_dwh.rename(columns = {'car_selling_status': 'Estatus de venta',
+                                                          'car_legal_status': 'Estadus legal',
+                                                          'car_physical_status': 'Estatus físico',
+                                                          'internal_car_id':'ID', 
+                                                          'car_vin':'NIV', 
+                                                          'purchase_channel':'Tipo de compra',	
+                                                          'car_purchase_price_car':'Precio con IVA',	
+                                                          'car_purchase_location':'Origen de compra', 
+                                                          'car_handedover_from_seller': 'Fecha de ingreso',
+                                                          'car_current_location':'Ubicacion Actual',
+                                                          'client_subtype': 'Persona compra',
+                                                          'car_manufacturer_name': 'Marca',
+                                                          'car_model_name': 'Modelo',
+                                                          'year_manufactured': 'Año',
+                                                          'car_trim': 'Versión',
+                                                          'car_color': 'Color'})
 
 inventory_cars_dwh = inventory_cars_dwh.sort_values('ID')
 
