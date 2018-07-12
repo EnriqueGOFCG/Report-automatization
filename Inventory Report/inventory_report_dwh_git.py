@@ -13,6 +13,7 @@ import os
 todate = datetime.utcnow()
 
 dwh_directory = r'.\Python CSVs\DWH Tables'
+
 inventory_report_directory = r'.\Python CSVs\Inventory Reports'
 if not os.path.exists(inventory_report_directory):
     os.makedirs(inventory_report_directory)
