@@ -66,7 +66,7 @@ cars_dwh = cars_dwh[columns_1]
 cars_dwh.loc[cars_dwh.car_vin.isnull(),'car_vin'] = 'Faltante'
 cars_dwh.loc[cars_dwh.car_purchase_location.isnull(),'car_purchase_location'] = 'Faltante'
 cars_dwh.car_vin = cars_dwh.car_vin.str.replace('\(.*\)', '').str.strip()
-cars_dwh.car_color = cars_dwh.car_color.str.replace('*.\(', '').str.replace('\)*.', '')
+cars_dwh.car_color = cars_dwh.car_color.str.replace('.*\(', '').str.replace('\).*', '').str.title()
 
 inventory_cars_dwh = cars_dwh[(cars_dwh.car_selling_status.isin(['AVAILABLE',
                                                                  'RESERVED',
@@ -105,7 +105,6 @@ inventory_cars_dwh['Dias en inventario buckets'] =\
 strange_cars_dwh = cars_dwh[(cars_dwh.car_purchase_price_car < 2) |
                              (cars_dwh.car_selling_status.isnull())]
 
-#inventory_cars_dwh = inventory_cars_dwh.iloc[:, 3:]
 inventory_cars_dwh = inventory_cars_dwh.rename(columns = {'car_selling_status': 'Estatus de venta',
                                                           'car_legal_status': 'Estadus legal',
                                                           'car_physical_status': 'Estatus físico',
@@ -128,7 +127,7 @@ inventory_cars_dwh = inventory_cars_dwh.sort_values('ID')
 
 for i in inventory_cars_dwh:
     inventory_cars_dwh.loc[inventory_cars_dwh[i].isnull(), i] = ' '
-
+    
 writer = pd.ExcelWriter(inventory_report_directory + r'\inventory_dwh_' +
                          str(todate).split()[0] + 
                          '.xlsx')
