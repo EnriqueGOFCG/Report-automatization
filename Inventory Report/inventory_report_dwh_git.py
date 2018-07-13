@@ -59,18 +59,20 @@ cars_dwh.loc[cars_dwh.client_subtype != 'person',
              cars_dwh.loc[cars_dwh.client_subtype != 'person',
                          'car_purchase_price_car']/1.16
 
+
 cars_dwh = cars.loc[:, cars.columns[cars.columns.isin(columns_1)]]
 cars_dwh = cars_dwh[columns_1]
 
 cars_dwh.loc[cars_dwh.car_vin.isnull(),'car_vin'] = 'Faltante'
 cars_dwh.loc[cars_dwh.car_purchase_location.isnull(),'car_purchase_location'] = 'Faltante'
 cars_dwh.car_vin = cars_dwh.car_vin.str.replace('\(.*\)', '').str.strip()
+cars_dwh.car_color = cars_dwh.car_color.str.replace('*.\(', '').str.replace('\)*.', '')
 
 inventory_cars_dwh = cars_dwh[(cars_dwh.car_selling_status.isin(['AVAILABLE',
                                                                  'RESERVED',
                                                                  'NOTAVAILABLE',
-                                                                 'PENDINGCLEARANCE'])) &\
-                             (-cars_dwh.car_selling_status.isnull()) &
+                                                                 'PENDINGCLEARANCE',
+                                                                 'ONCONSIGNMENT'])) &\
                              (-cars_dwh.car_legal_status.isnull()) &
 #                             (-cars_dwh.car_legal_status.isin(['OWNER'])) &
                              (-cars_dwh.purchase_channel.isnull()) &
@@ -80,14 +82,28 @@ inventory_cars_dwh = cars_dwh[(cars_dwh.car_selling_status.isin(['AVAILABLE',
                              (cars_dwh.car_physical_status.isin(['INTRANSIT',
                                                                  'ATOURLOCATION']))]
 
-strange_cars_dwh = cars_dwh[(cars_dwh.car_purchase_price_car < 2) |
-                             (cars_dwh.car_selling_status.isnull())]
-
 def list0(x):
-    return str(x).split()[0]
+    try:
+        return datetime.strptime(x.split()[0], "%Y-%m-%d")
+    except:
+        return pd.NaT
 
 inventory_cars_dwh.car_handedover_from_seller = inventory_cars_dwh.car_handedover_from_seller.apply(list0).replace('nan','')
-strange_cars_dwh.car_handedover_from_seller = strange_cars_dwh.car_handedover_from_seller.apply(list0).replace('nan','')
+
+inventory_cars_dwh['Dias en inventario'] = inventory_cars_dwh.\
+                                            car_handedover_from_seller.\
+                                            apply(lambda x: (todate - x).days)
+inventory_cars_dwh['Dias en inventario buckets'] = \
+                            pd.cut(inventory_cars_dwh['Dias en inventario'], np.arange(0,33,3))
+inventory_cars_dwh['Dias en inventario buckets'] = \
+        inventory_cars_dwh['Dias en inventario buckets'].cat.add_categories(['30 +'])
+inventory_cars_dwh['Dias en inventario buckets'] =\
+         inventory_cars_dwh['Dias en inventario buckets'].fillna('30 +')
+inventory_cars_dwh['Dias en inventario buckets'] =\
+         inventory_cars_dwh['Dias en inventario buckets'].astype(str)
+
+strange_cars_dwh = cars_dwh[(cars_dwh.car_purchase_price_car < 2) |
+                             (cars_dwh.car_selling_status.isnull())]
 
 #inventory_cars_dwh = inventory_cars_dwh.iloc[:, 3:]
 inventory_cars_dwh = inventory_cars_dwh.rename(columns = {'car_selling_status': 'Estatus de venta',
@@ -96,6 +112,7 @@ inventory_cars_dwh = inventory_cars_dwh.rename(columns = {'car_selling_status': 
                                                           'internal_car_id':'ID', 
                                                           'car_vin':'NIV', 
                                                           'purchase_channel':'Tipo de compra',	
+                                                          'car_purchased_date': 'Fecha de compra',
                                                           'car_purchase_price_car':'Precio con IVA',	
                                                           'car_purchase_location':'Origen de compra', 
                                                           'car_handedover_from_seller': 'Fecha de ingreso',

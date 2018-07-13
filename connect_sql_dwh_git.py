@@ -13,10 +13,6 @@ import os
 
 dwh_directory = r'./Python CSVs/DWH Tables'
 
-if not os.path.exists(dwh_directory):
-    os.makedirs(dwh_directory)
-
-
 def get_dwh_tables(connection_parameters_dir):
     connection_parameters = open(connection_parameters_dir + '\connection_parameters.txt')
     connection_parameters = connection_parameters.readlines()
@@ -39,6 +35,9 @@ def get_dwh_tables(connection_parameters_dir):
     auctions = pd.read_sql("SELECT * FROM dbo.Auctions", cnxn)
     auction_winners = pd.read_sql("SELECT * FROM dbo.AuctionWinners", cnxn)
     inspection_centers = pd.read_sql("SELECT * FROM dbo.InspectionCenter", cnxn)
+    
+    if not os.path.exists(dwh_directory):
+        os.makedirs(dwh_directory)
     
     cars.to_csv(dwh_directory + r'/db_cars.csv', index = False)
     car_manufacturers.to_csv(dwh_directory + '\db_cars_manufacturers.csv', index = False)
