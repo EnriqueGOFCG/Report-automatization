@@ -74,9 +74,6 @@ car_tasks = car_tasks[['id',
                        'Zona'
                        ]]
 
-
-
-
 operaciones = car_tasks.groupby(['Responsable','Mes Día'], as_index = False).agg({'purchaseLocation': 'count'})
 operaciones = operaciones.pivot(index = 'Responsable', 
                                 columns = 'Mes Día', 
@@ -88,7 +85,8 @@ for i in operaciones.index:
 for i in operaciones:
     operaciones.loc['Total', i] = operaciones.loc[:, i].sum()
 
-puntos_de_compra = car_tasks.groupby(['Zona','Mes Día'], as_index = False).agg({'purchaseLocation': 'count'})
+puntos_de_compra = car_tasks[car_tasks.Responsable.str.contains('oordinador')]
+puntos_de_compra = puntos_de_compra.groupby(['Zona','Mes Día'], as_index = False).agg({'purchaseLocation': 'count'})
 puntos_de_compra = puntos_de_compra.pivot(index = 'Zona', 
                                           columns = 'Mes Día', 
                                           values = 'purchaseLocation')
@@ -99,10 +97,6 @@ for i in puntos_de_compra.index:
     puntos_de_compra.loc[i, 'Grand Total'] = puntos_de_compra.loc[i, :].sum()
 for i in puntos_de_compra:
     puntos_de_compra.loc['Total', i] = puntos_de_compra.loc[:, i].sum()
-
-if not os.path.exists(car_task_directory):
-    os.makedirs(car_task_directory)
-
 
 writer = pd.ExcelWriter(car_task_directory + r'\car_task_' +
                          str(todate) + 
