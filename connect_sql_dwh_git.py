@@ -22,10 +22,9 @@ def get_dwh_tables(connection_parameters_dir):
                           Database = connection_parameters[2].split('= ')[1][:-1], 
                           UID = connection_parameters[3].split('= ')[1][:-1],
                           PWD = connection_parameters[4].split('= ')[1])
-    
-    cursor = cnxn.cursor()
-    
+        
     cars = pd.read_sql('SELECT * FROM dbo.Cars', cnxn)
+    cars_payment_history = pd.read_sql('SELECT * FROM dbo.CarPaymentHistory', cnxn)
     car_manufacturers = pd.read_sql('SELECT * FROM dbo.CarManufacturers', cnxn)
     car_models = pd.read_sql("SELECT * FROM dbo.CarModel", cnxn)
     bids = pd.read_sql("SELECT * FROM dbo.Bids", cnxn)
@@ -40,6 +39,7 @@ def get_dwh_tables(connection_parameters_dir):
         os.makedirs(dwh_directory)
     
     cars.to_csv(dwh_directory + r'/db_cars.csv', index = False)
+    cars_payment_history.to_csv(dwh_directory + '\db_car_payment_history.csv', index = False)
     car_manufacturers.to_csv(dwh_directory + '\db_cars_manufacturers.csv', index = False)
     car_models.to_csv(dwh_directory + '\db_cars_models.csv', index = False)
     bids.to_csv(dwh_directory + '\db_bids.csv', index = False)
