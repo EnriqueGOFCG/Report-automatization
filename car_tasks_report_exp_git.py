@@ -13,6 +13,8 @@ todate = date.today()
 
 exp_directory = r'.\Python CSVs\Export Tables'
 car_task_directory = r'.\Python CSVs\Daily Car Task Reports'
+if not os.path.exists(car_task_directory):
+    os.makedirs(car_task_directory)
 
 cars = pd.read_csv(exp_directory + r'\MX_daily_cars.csv')
 car_tasks = pd.read_csv(exp_directory + r'\MX_daily_car_tasks.csv')
@@ -74,6 +76,13 @@ car_tasks = car_tasks[['id',
                        'Zona'
                        ]]
 
+try:
+    for i in car_tasks:
+        car_tasks[i] = car_tasks[i].astype(str)
+    update_cartasks(car_tasks)
+except:
+    pass
+
 operaciones = car_tasks.groupby(['Responsable','Mes Día'], as_index = False).agg({'purchaseLocation': 'count'})
 operaciones = operaciones.pivot(index = 'Responsable', 
                                 columns = 'Mes Día', 
@@ -97,7 +106,7 @@ for i in puntos_de_compra.index:
     puntos_de_compra.loc[i, 'Grand Total'] = puntos_de_compra.loc[i, :].sum()
 for i in puntos_de_compra:
     puntos_de_compra.loc['Total', i] = puntos_de_compra.loc[:, i].sum()
-
+    
 writer = pd.ExcelWriter(car_task_directory + r'\car_task_' +
                          str(todate) + 
                          '.xlsx')
