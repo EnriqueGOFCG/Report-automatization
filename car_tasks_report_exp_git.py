@@ -8,6 +8,10 @@ Created on Fri Jul 13 12:33:03 2018
 import pandas as pd
 import os
 from datetime import datetime, timedelta, date
+try:
+    from google_sheets_update import update_cartasks
+except:
+    pass
 
 todate = date.today()
 
