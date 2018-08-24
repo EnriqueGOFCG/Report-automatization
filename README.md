@@ -40,3 +40,5 @@ Ejemplo:
 ```
 python ".\MiCarpeta\MiPrograma.py"
 ```
+
+El comando ejecutará el script señalado en dicha dirección.
